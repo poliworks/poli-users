@@ -1,6 +1,7 @@
 (ns poli-users.server
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
+            [poli-users.db.datomic :as db]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]))
 
@@ -15,4 +16,4 @@
       (wrap-defaults api-defaults)))
 
 (defn bootstrap! []
-  )
+  (db/install-schema!))

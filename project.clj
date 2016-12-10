@@ -13,7 +13,8 @@
                  [clj-jwt "0.1.1"]]
   :plugins [[lein-ring "0.9.7"]]
   :resources-paths ["resources"]
-  :ring {:handler poli-users.server/app}
+  :ring {:handler poli-users.server/app
+         :init poli-users.server/bootstrap!}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.0"]]}})
