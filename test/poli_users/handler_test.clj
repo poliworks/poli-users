@@ -1,7 +1,7 @@
 (ns poli-users.handler-test
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
-            [poli-users.handler :refer :all]))
+            [poli-users.server :refer :all]))
 
 (deftest test-app
   (testing "main route"

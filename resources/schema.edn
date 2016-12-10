@@ -1,0 +1,124 @@
+;; Student schema
+{:poli-users/student-schema
+ {:txes [[{:db/id                 #db/id [:db.part/db]
+          :db/ident              :student/name
+          :db/valueType          :db.type/string
+          :db/cardinality        :db.cardinality/one
+          :db/doc                "Student name"
+          :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+          :db/ident              :student/email
+          :db/valueType          :db.type/string
+          :db/unique             :db.unique/value
+          :db/cardinality        :db.cardinality/one
+          :db/doc                "Student email"
+          :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :student/semester
+           :db/valueType          :db.type/long
+           :db/unique             :db.unique/value
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Student semester"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+          :db/ident              :student/course
+          :db/valueType          :db.type/string
+          :db/cardinality        :db.cardinality/one
+          :db/doc                "Student course"
+          :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :student/rg
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Student RG"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :student/cpf
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Student CPF"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :student/picture-url
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Student picture URL"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :student/sex
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Student Sex"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :student/num-usp
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Student Numero USP"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+          :db/ident              :student/id
+          :db/valueType          :db.type/long
+          :db/unique             :db.unique/value
+          :db/cardinality        :db.cardinality/one
+          :db/doc                "Student id"
+          :db.install/_attribute :db.part/db}]]}
+
+;; Teacher schema
+ :poli-users/teacher-schema
+ {:txes [[{:db/id                 #db/id [:db.part/db]
+           :db/ident              :teacher/name
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Teacher name"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :teacher/email
+           :db/valueType          :db.type/string
+           :db/unique             :db.unique/value
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Teacher email"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :teacher/department
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Teacher department"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :teacher/rg
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Teacher RG"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :teacher/cpf
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Teacher CPF"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :teacher/picture-url
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Teacher picture URL"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :teacher/sex
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Teacher Sex"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :teacher/num-usp
+           :db/valueType          :db.type/string
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Teacher Numero USP"
+           :db.install/_attribute :db.part/db}]
+         [{:db/id                 #db/id [:db.part/db]
+           :db/ident              :teacher/id
+           :db/valueType          :db.type/long
+           :db/unique             :db.unique/value
+           :db/cardinality        :db.cardinality/one
+           :db/doc                "Teacher id"
+           :db.install/_attribute :db.part/db}]]}}
