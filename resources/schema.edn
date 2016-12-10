@@ -16,7 +16,6 @@
          [{:db/id                 #db/id [:db.part/db]
            :db/ident              :student/semester
            :db/valueType          :db.type/long
-           :db/unique             :db.unique/value
            :db/cardinality        :db.cardinality/one
            :db/doc                "Student semester"
            :db.install/_attribute :db.part/db}]
@@ -59,7 +58,7 @@
          [{:db/id                 #db/id [:db.part/db]
           :db/ident              :student/id
           :db/valueType          :db.type/uuid
-          :db/unique             :db.unique/value
+          :db/unique             :db.unique/identity
           :db/cardinality        :db.cardinality/one
           :db/doc                "Student id"
           :db.install/_attribute :db.part/db}]]}
@@ -118,7 +117,7 @@
          [{:db/id                 #db/id [:db.part/db]
            :db/ident              :teacher/id
            :db/valueType          :db.type/uuid
-           :db/unique             :db.unique/value
+           :db/unique             :db.unique/identity
            :db/cardinality        :db.cardinality/one
            :db/doc                "Teacher id"
            :db.install/_attribute :db.part/db}]]}}
