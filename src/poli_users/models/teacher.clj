@@ -10,5 +10,6 @@
                        :teacher/num-usp     {:schema s/Str :required true}
                        :teacher/department  {:schema s/Str :required true}
                        :teacher/picture-url {:schema s/Str :required false}
-                       :teacher/sex         {:schema s/Str :required true}})
+                       :teacher/sex         {:schema s/Str :required true}
+                       :teacher/token       {:schema s/Str :required false}})
 (def Teacher (gen-schema teacher-skeleton))

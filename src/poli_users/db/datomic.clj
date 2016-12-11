@@ -4,7 +4,8 @@
             [poli-users.models.student :as m-s]
             [poli-users.models.teacher :as m-t]
             [schema.core :as s]
-            [poli-users.models.user :as m-u]))
+            [poli-users.models.user :as m-u]
+            [poli-users.adapters :as adapters]))
 
 (def prod-uri "datomic:free://localhost:4334/poli-users")
 (def test-uri "datomic:mem://test")
@@ -14,16 +15,12 @@
 (d/create-database datomic-uri)
 (def conn (d/connect datomic-uri))
 
-(s/defn ^:private gen-uuid :- s/Str []
+(s/defn gen-uuid :- s/Str []
   (d/squuid))
 
-(s/defn ^:private user-type->primary-key :- s/Keyword
-  [user-type :- s/Keyword]
-  (keyword (name user-type) "id"))
-
 (defn ^:private prepare-entity [entity primary-key]
-  (assoc entity :db/id (d/tempid :db.part/user)
-                primary-key (gen-uuid)))
+  (-> (update entity primary-key #(or % (gen-uuid)))
+      (assoc :db/id (d/tempid :db.part/user))))
 
 (defn install-schema! []
   (let [schema (c/read-resource "schema.edn")]
@@ -31,9 +28,9 @@
 
 (s/defn user-by-id :- (s/either m-s/Student m-t/Teacher)
   [user-type :- s/Keyword, id :- s/Uuid]
-  (d/q '[:find (d/pull ?t [*])
+  (first (d/q '[:find [(pull ?u [*])]
          :in $ ?u-id ?u-type-key
-         :where [?u ?u-type-key ?u-id]] conn id (user-type->primary-key user-type)))
+         :where [?u ?u-type-key ?u-id]] (d/db conn) id (adapters/user-type->primary-key user-type))))
 
 (s/defn student-by-id :- m-s/Student
   [id :- s/Uuid]
@@ -45,9 +42,9 @@
 
 (s/defn create-user :- m-u/User
   [user-type :- s/Keyword user :- (s/pred map?)]
-  (let [prepared-user (prepare-entity user (user-type->primary-key user-type))]
+  (let [prepared-user (prepare-entity user (adapters/user-type->primary-key user-type))]
     @(d/transact conn [prepared-user])
-    (dissoc prepare-entity :db/id)))
+    (dissoc prepared-user :db/id)))
 
 (s/defn create-student :- m-s/Student
   [student :- m-s/Student]

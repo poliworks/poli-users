@@ -11,5 +11,6 @@
                        :student/course      {:schema s/Str :required true}
                        :student/semester    {:schema s/Int :required true}
                        :student/picture-url {:schema s/Str :required false}
-                       :student/sex         {:schema s/Str :required true}})
+                       :student/sex         {:schema s/Str :required true}
+                       :student/token       {:schema s/Str :required false}})
 (def Student (gen-schema student-skeleton))
