@@ -36,12 +36,23 @@
          :in $ ?t-id
          :where [?t :student/id ?t-id]]) conn id)
 
-(s/defn create-student :- m-s/Student
+(s/defn user-by-id :- (s/either m-s/Student m-t/Teacher)
+  [user-type :- s/Keyword, id :- s/Uuid]
+  (if (= user-type :student)
+    (student-by-id id)
+    (teacher-by-id id)))
+
+(s/defn create-student
   [student :- m-s/Student]
   (let [prepared-student (prepare-entity student :student/id)]
     @(d/transact conn [prepare-entity])))
 
-(s/defn create-teacher :- m-t/Teacher
+(s/defn create-teacher
   [teacher :- m-t/Teacher]
   (let [prepared-teacher (prepare-entity teacher :teacher/id)]
     @(d/transact conn [prepared-teacher])))
+
+(s/defn create-user [user-type :- s/Keyword user :- (s/pred map?)]
+  (if (= user-type :student)
+    (create-student user)
+    (create-teacher user)))
