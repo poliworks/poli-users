@@ -12,3 +12,7 @@
 (s/defn user-type->primary-key :- s/Keyword
         [user-type :- s/Keyword]
         (keyword (name user-type) "id"))
+
+(s/defn user-type->attribute :- s/Keyword
+  [user-type :- s/Keyword attribute :- s/Keyword]
+  (keyword (name user-type) (name attribute)))
