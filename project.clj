@@ -14,6 +14,7 @@
                  [org.clojure/tools.reader "1.0.0-beta3"]
                  [ring/ring-defaults "0.2.1"]
                  [io.rkn/conformity "0.4.0"]
+                 [jumblerg/ring.middleware.cors "1.0.1"]
                  [clj-jwt "0.1.1"]]
   :plugins [[lein-ring "0.9.7"]]
   :resources-paths ["resources"]

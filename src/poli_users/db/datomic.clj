@@ -10,7 +10,7 @@
 (def prod-uri "datomic:free://localhost:4334/poli-users")
 (def test-uri "datomic:mem://test")
 
-(def datomic-uri test-uri)                                  ;; Change here the datomic URI
+(def datomic-uri prod-uri)                                  ;; Change here the datomic URI
 
 (d/create-database datomic-uri)
 (def conn (d/connect datomic-uri))
@@ -29,8 +29,8 @@
 (s/defn user-by-id :- (s/either m-s/Student m-t/Teacher)
   [user-type :- s/Keyword, id :- s/Uuid]
   (first (d/q '[:find [(pull ?u [*])]
-         :in $ ?u-id ?u-type-key
-         :where [?u ?u-type-key ?u-id]] (d/db conn) id (adapters/user-type->primary-key user-type))))
+                :in $ ?u-id ?u-type-key
+                :where [?u ?u-type-key ?u-id]] (d/db conn) id (adapters/user-type->primary-key user-type))))
 
 (s/defn student-by-id :- m-s/Student
   [id :- s/Uuid]

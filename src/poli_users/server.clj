@@ -5,6 +5,7 @@
             [poli-users.controller :as controller]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [ring.util.response :refer :all]
+            [ring.middleware.cors :as cors]
             [ring.middleware.keyword-params :as kp]
             [ring.middleware.multipart-params :as mp]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
@@ -30,6 +31,7 @@
 
 (defn get-user [user-type id]
   (-> (controller/get-user user-type (UUID/fromString id))
+      debug
       (adapters/model->external)
       response))
 
@@ -52,6 +54,7 @@
 
 (def app
   (-> app-routes
+      (cors/wrap-cors #".*")
       (kp/wrap-keyword-params)
       (mp/wrap-multipart-params)
       (wrap-json-body {:keywords? true})

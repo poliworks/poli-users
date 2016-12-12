@@ -45,6 +45,7 @@
     <orderEntry type="library" name="Leiningen: io.rkn/conformity:0.4.0" level="project" />
     <orderEntry type="library" name="Leiningen: javax.servlet/servlet-api:2.5" level="project" />
     <orderEntry type="library" name="Leiningen: joda-time:2.8.2" level="project" />
+    <orderEntry type="library" name="Leiningen: jumblerg/ring.middleware.cors:1.0.1" level="project" />
     <orderEntry type="library" name="Leiningen: medley:0.8.2" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.activemq/artemis-commons:1.4.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.activemq/artemis-core-client:1.4.0" level="project" />
