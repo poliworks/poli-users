@@ -10,7 +10,7 @@
 (def prod-uri "datomic:free://localhost:4334/poli-users")
 (def test-uri "datomic:mem://test")
 
-(def datomic-uri prod-uri)                                  ;; Change here the datomic URI
+(def datomic-uri (or (System/getenv "datomic_uri") prod-uri))                             ;; Change here the datomic URI
 
 (d/create-database datomic-uri)
 (def conn (d/connect datomic-uri))
