@@ -12,25 +12,27 @@
             [poli-users.adapters :as adapters])
   (:import (java.util UUID)))
 
+
+(defn response-or-error [user error-code error-message]
+  (if (nil? user)
+    {:status error-code :body {:error error-message}}
+    {:status 200 :body (adapters/model->external user)}))
+
 (defn register [user-type {:keys [body params] :as request}]
   (-> (controller/register-user user-type body (-> (get params "image") :tempfile))
-      (adapters/model->external)
-      response))
+      (response-or-error 400 "Could not register user")))
 
 (defn login [user-type {:keys [body] :as request}]
   (-> (controller/login-user user-type body)
-      (adapters/model->external)
-      response))
+      (response-or-error 403 "Error In Loging")))
 
 (defn get-user [user-type id]
   (-> (controller/get-user user-type (UUID/fromString id))
-      (adapters/model->external)
-      response))
+      (response-or-error 400 "Error getting user")))
 
 (defn set-image [user-type {:keys [params]}]
   (-> (controller/set-image user-type (:id params) (-> params :file))
-      (adapters/model->external)
-      response))
+      (response-or-error 400 "Error Uploading Image")))
 
 (defroutes app-routes
   (context "/student" []

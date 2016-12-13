@@ -15,10 +15,12 @@
         request-user (assoc user :type user-type :id new-user-id)]
     (when-let [response (http/post (str poli-auth-host "/register") {:form-params request-user
                                                                      :content-type :json
-                                                                     :as :json})]
-      (assoc (->> (dissoc request-user :password :type)
-                  (adapters/external->model user-type)
-                  (db/create-user user-type)) (adapters/user-type->attribute user-type :token) (:token (:body response))))))
+                                                                     :as :json
+                                                                     :throw-exceptions false})]
+      (when (http/success? response)
+        (assoc (->> (dissoc request-user :password :type)
+                    (adapters/external->model user-type)
+                    (db/create-user user-type)) (adapters/user-type->attribute user-type :token) (:token (:body response)))))))
 
 (s/defn login-user :- m-u/User
   [user-type {:keys [email password]}]
