@@ -54,13 +54,10 @@
   [teacher :- m-t/Teacher]
   (create-user :teacher teacher))
 
-(defn debug [v]
-  (println v)
-  v)
-
 (s/defn update-user [user-type id update-map]
-  @(d/transact conn (debug (-> (user-by-id user-type id)
-                               debug
-                               (select-keys [:db/id])
-                               (merge update-map)
-                               vector))))
+  (let [user (user-by-id user-type id)]
+    @(d/transact conn (-> user
+                         (select-keys [:db/id])
+                         (merge update-map)
+                         vector))
+    (merge user update-map)))
